@@ -43,7 +43,9 @@
         },
         methods: {
             createPost(newPost) {
+                this.post.id = this.posts.length + 1
                 this.posts.push(newPost)
+                console.log(this.post.id)
                 this.title = ''
                 this.description = ''
                 this.img = ''
