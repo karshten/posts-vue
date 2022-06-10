@@ -14,10 +14,8 @@
 </template>
 
 <script>
-    import PostButton from "./UI/PostButton";
 
     export default {
-        components: {PostButton},
         data() {
             return {
                 showDescription: this.description.slice(0, 50)+'...'

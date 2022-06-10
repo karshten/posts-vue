@@ -9,6 +9,7 @@
 
 <script>
     export default {
+        name: 'PostFormInput',
         props:{
             post:{
                 type:Object

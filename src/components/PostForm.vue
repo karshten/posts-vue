@@ -30,12 +30,8 @@
 </template>
 
 <script>
-    import SectionTitle from "./UI/SectionTitle";
-    import PostFormInput from "./UI/PostFormInput";
-    import PostButton from "./UI/PostButton";
 
     export default {
-        components: {PostFormInput, PostButton,SectionTitle},
         data() {
             return {
                 sectionTitle: 'Add post',

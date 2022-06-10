@@ -1,6 +1,5 @@
 <template>
     <main class="posts">
-
         <PostForm
             :posts="posts"
             @createPost="createPost"
