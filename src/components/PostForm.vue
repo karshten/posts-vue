@@ -1,4 +1,10 @@
 <template>
+    <SectionTitle>
+        {{title}}
+        <template #desc="">
+            <p class="posts__title__desc">{{mainDesc}}</p>
+        </template>
+    </SectionTitle>
     <form>
         <input
                 v-model="post.title"
@@ -11,23 +17,28 @@
                 type="text"
                 placeholder="Описание">
         <input
-                v-bind:value="this.img"
-                @input="post.img = $event.target.value"
+                v-model="post.img"
                 class="posts__inputAddPost"
                 type="text"
                 placeholder="Фото(ссылка)">
-        <button
-                @click="createPost(post)"
-                type="button"
-                class="posts__btnAddPost postItem__btn">Добавить
-        </button>
+        <PostButton
+                @click="createPost"
+                type="button">
+                Создать
+        </PostButton>
     </form>
 </template>
 
 <script>
+    import PostButton from "./UI/PostButton";
+    import SectionTitle from "./UI/SectionTitle";
+
     export default {
+        components: {PostButton,SectionTitle},
         data() {
             return {
+                title: 'Add post',
+                mainDesc:`If you know fascinating feature about JS, you can share it`,
                 post: {
                     title: '',
                     description: '',
@@ -42,19 +53,20 @@
             }
         },
         methods: {
-            createPost(newPost) {
+            createPost() {
                 this.post.id = this.posts.length + 1
-                this.posts.push(newPost)
-                console.log(this.post.id)
-                this.title = ''
-                this.description = ''
-                this.img = ''
+                this.$emit('createPost', this.post)
+                this.post = {
+                    title: '',
+                    description: '',
+                    img: ''
+                }
             }
         }
     }
 </script>
 
-<style scoped>
+<style>
 
     .posts__inputAddPost {
         width: 60%;

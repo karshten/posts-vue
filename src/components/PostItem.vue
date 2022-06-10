@@ -1,64 +1,64 @@
 <template>
-    <div v-for="(post,i) in posts">
-        <li v-if="i < showCount" :key="post.id" class="content__postItem">
-            <div class="postItem__main-part">
-                <img class="postItem__img" :src="post.img" alt="post.title">
-                <div class="postItem__text">
-                    <h3>{{post.title}}</h3>
-                    <p>{{post.description}}</p>
-                    <a href="">подробнее</a>
-                </div>
-            </div>
-            <button class="postItem__btn">Нравиться</button>
-        </li>
+    <div class="postItem__main-part">
+        <img class="postItem__img"
+             :src="img ? img : 'default-img.png'"
+             @error="img = 'default-img.png' "
+             alt="post.title">
+        <div class="postItem__text">
+            <h3>{{title}}</h3>
+            <p>{{showDescription}}</p>
+            <PostButton @click="handleMoreDesc" href="">подробнее</PostButton>
+        </div>
     </div>
-    <button v-if="showCount < posts.length" class="postItem__btn" @click="showMore">Смотреть больше..</button>
+    <PostButton>Удалить</PostButton>
 </template>
 
 <script>
+    import PostButton from "./UI/PostButton";
+
     export default {
+        components: {PostButton},
         data() {
             return {
-                showCount: 3,
+                showDescription: this.description.slice(0, 50)+'...'
             }
         },
         props: {
-            posts: {
-                type: Array,
-                required: true,
-            }
+            img: {
+                type:String,
+                default: 'default-img.png'
+            },
+            title: String,
+            description: String
         },
-        methods: {
-            showMore() {
-                this.showCount += 3
+        methods:{
+            handleMoreDesc (){
+                this.showDescription = this.description
             }
         }
     }
 </script>
 
-<style scoped>
-    .posts__posts-content {
-        width: 100%;
-        list-style: none;
-    }
-
-    .content__postItem {
-        padding: 15px;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: space-between;
-        border: 2px solid #3e8969;
-        align-items: center;
-    }
+<style>
 
     .postItem__img {
-        max-width: 150px;
+        max-width: 120px;
+        max-height: 150px;
         margin-right: 15px;
     }
 
     .postItem__main-part {
-        max-width: 40%;
+        max-width: 60%;
         display: flex;
         align-items: center;
+    }
+
+    .postItem__main-part p {
+        margin: 6px 0;
+    }
+
+    .postItem__main-part a {
+        color: #3e8969;
+        text-decoration: none;
     }
 </style>
