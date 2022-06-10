@@ -7,7 +7,7 @@
         <div class="postItem__text">
             <h3>{{title}}</h3>
             <p>{{showDescription}}</p>
-            <PostButton @click="handleMoreDesc" href="">подробнее</PostButton>
+            <PostButton @click="handleMoreDesc">подробнее</PostButton>
         </div>
     </div>
     <PostButton>Удалить</PostButton>

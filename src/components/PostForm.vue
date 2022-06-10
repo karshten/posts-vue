@@ -1,26 +1,26 @@
 <template>
     <SectionTitle>
-        {{title}}
+        {{sectionTitle}}
         <template #desc="">
             <p class="posts__title__desc">{{mainDesc}}</p>
         </template>
     </SectionTitle>
     <form>
-        <input
-                v-model="post.title"
-                class="posts__inputAddPost"
-                type="text"
-                placeholder="Названте поста">
-        <input
-                v-model="post.description"
-                class="posts__inputAddPost"
-                type="text"
-                placeholder="Описание">
-        <input
-                v-model="post.img"
-                class="posts__inputAddPost"
-                type="text"
-                placeholder="Фото(ссылка)">
+        <PostFormInput
+                :placeholder="'Название поста'"
+                :post="post"
+                :post-value="post.title"
+        />
+        <PostFormInput
+                :placeholder="'Описание поста'"
+                :post="post"
+                :post-value="post.description"
+        />
+        <PostFormInput
+                :placeholder="'Картинка поста'"
+                :post="post"
+                :post-value="post.img"
+        />
         <PostButton
                 @click="createPost"
                 type="button">
@@ -30,14 +30,15 @@
 </template>
 
 <script>
-    import PostButton from "./UI/PostButton";
     import SectionTitle from "./UI/SectionTitle";
+    import PostFormInput from "./UI/PostFormInput";
+    import PostButton from "./UI/PostButton";
 
     export default {
-        components: {PostButton,SectionTitle},
+        components: {PostFormInput, PostButton,SectionTitle},
         data() {
             return {
-                title: 'Add post',
+                sectionTitle: 'Add post',
                 mainDesc:`If you know fascinating feature about JS, you can share it`,
                 post: {
                     title: '',
@@ -68,10 +69,4 @@
 
 <style>
 
-    .posts__inputAddPost {
-        width: 60%;
-        padding: 5px;
-        margin-bottom: 15px;
-        border: 1px solid #3e8969;
-    }
 </style>

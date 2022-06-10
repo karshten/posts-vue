@@ -1,6 +1,6 @@
 <template>
     <SectionTitle>
-        {{title}}
+        {{sectionTitle}}
         <template v-slot:desc>
             <p class="posts__title__desc">{{mainDesc}}</p>
         </template>
@@ -39,7 +39,7 @@
         data() {
             return {
                 showCount: 3,
-                title:'Posts',
+                sectionTitle:'Posts',
                 mainDesc:`Posts about best JS libraries/frameworks`
             }
         },
