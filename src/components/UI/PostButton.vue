@@ -10,11 +10,11 @@
     }
 </script>
 
-<style scoped>
+<style>
     .postBtn {
         display: block;
         background: #3e8969;
-        padding: 4px 7px;
+        padding: 8px 16px;
         cursor: pointer;
         border: none;
         color: #fff;

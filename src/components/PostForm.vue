@@ -7,24 +7,24 @@
     </SectionTitle>
     <form>
         <PostFormInput
-                :placeholder="'Название поста'"
-                :post="post"
-                :post-value="post.title"
+                v-model="post.title"
+                :placeholder="'post name...'"
+        />
+<!--        v-model.trim-->
+<!--        v-model.number-->
+<!--        v model |modification|-->
+        <PostFormInput
+                v-model="post.description"
+                :placeholder="'post description...'"
         />
         <PostFormInput
-                :placeholder="'Описание поста'"
-                :post="post"
-                :post-value="post.description"
-        />
-        <PostFormInput
-                :placeholder="'Картинка поста'"
-                :post="post"
-                :post-value="post.img"
+                v-model="post.img"
+                :placeholder="'post image...'"
         />
         <PostButton
                 @click="createPost"
                 type="button">
-                Создать
+            create
         </PostButton>
     </form>
 </template>
@@ -35,7 +35,7 @@
         data() {
             return {
                 sectionTitle: 'Add post',
-                mainDesc:`If you know fascinating feature about JS, you can share it`,
+                mainDesc: `If you know fascinating feature about JS, you can share it`,
                 post: {
                     title: '',
                     description: '',
@@ -59,7 +59,20 @@
                     img: ''
                 }
             }
-        }
+        },
+        // watch:{
+        //     post(newValue){
+        //         console.log(newValue)
+        //     }
+        // }
+        // watch:{
+        //    post:{
+        //        handler(newValue){
+        //            console.log(newValue)
+        //        },
+        //        deep:true
+        //    }
+        // }
     }
 </script>
 

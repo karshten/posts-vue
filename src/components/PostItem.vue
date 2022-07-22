@@ -1,16 +1,18 @@
 <template>
     <div class="postItem__main-part">
         <img class="postItem__img"
-             :src="img ? img : 'default-img.png'"
-             @error="img = 'default-img.png' "
+             :src="post.img ? post.img : 'default-img.png'"
+             @error="post.img = 'default-img.png' "
              alt="post.title">
         <div class="postItem__text">
-            <h3>{{title}}</h3>
-            <p>{{showDescription}}</p>
-            <PostButton @click="handleMoreDesc">подробнее</PostButton>
+            <h3>{{post.title}}</h3>
+            <p>{{slicedDesc}}</p>
+            <PostButton v-if="post.description.length > 50" @click="handleMoreDesc">
+                {{showDescription ? 'hide': 'show more...'}}
+            </PostButton>
         </div>
     </div>
-    <PostButton>Удалить</PostButton>
+    <PostButton @click="handelDeletePost">Delete</PostButton>
 </template>
 
 <script>
@@ -18,22 +20,33 @@
     export default {
         data() {
             return {
-                showDescription: this.description.slice(0, 50)+'...'
+                showDescription: false,
+                slicedDesc: this.post.description.slice(0, 50)
             }
         },
         props: {
-            img: {
-                type:String,
-                default: 'default-img.png'
-            },
-            title: String,
-            description: String
-        },
-        methods:{
-            handleMoreDesc (){
-                this.showDescription = this.description
+            post:{
+                type:Object,
+                required:true,
+                img:{
+                    default:'default-img.png'
+                }
             }
-        }
+        },
+        methods: {
+            handleMoreDesc(){
+                if (this.showDescription) {
+                    this.slicedDesc = this.post.description.slice(0, 50)
+                    this.showDescription = !this.showDescription
+                } else {
+                    this.slicedDesc = this.post.description
+                    this.showDescription = !this.showDescription
+                }
+        },
+            handelDeletePost(){
+                this.$emit('removePost', this.post)
+            }
+    }
     }
 </script>
 

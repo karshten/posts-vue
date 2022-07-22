@@ -1,21 +1,24 @@
 <template>
     <input
-            v-model="post.postValue"
             class="posts__inputAddPost"
             :placeholder="placeholder"
             type="text"
+            :value="modelValue"
+            @input="updateInput"
     >
 </template>
 
 <script>
     export default {
         name: 'PostFormInput',
-        props:{
-            post:{
-                type:Object
-            },
-            postValue: String,
+        props : {
+            modelValue:String,
             placeholder:String
+        },
+        methods:{
+            updateInput(event){
+                this.$emit('update:modelValue', event.target.value)
+            }
         }
     }
 </script>
